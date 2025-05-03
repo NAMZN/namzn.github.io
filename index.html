@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>နန်းအေးမဥ္ဇူနွယ် - Hydroponics Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #81c784;
+            --light: #f1f8e9;
+            --dark: #1b5e20;
+            --accent: #ffab00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Pyidaungsu', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInDown 1s ease;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin: 1rem auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: zoomIn 1s ease;
+        }
+        
+        .water-drop {
+            position: absolute;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: drop 8s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes drop {
+            0% {
+                transform: translateY(-100px) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(500px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .highlight {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .equation-box {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px dashed var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .equation {
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .equation-label {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border-top: 3px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            margin: 0 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Water drop animations -->
+        <div class="water-drop" style="width: 10px; height: 10px; left: 10%; animation-delay: 0s;"></div>
+        <div class="water-drop" style="width: 15px; height: 15px; left: 20%; animation-delay: 1s;"></div>
+        <div class="water-drop" style="width: 8px; height: 8px; left: 35%; animation-delay: 2s;"></div>
+        <div class="water-drop" style="width: 12px; height: 12px; left: 50%; animation-delay: 0.5s;"></div>
+        <div class="water-drop" style="width: 9px; height: 9px; left: 65%; animation-delay: 1.5s;"></div>
+        <div class="water-drop" style="width: 14px; height: 14px; left: 80%; animation-delay: 2.5s;"></div>
+        <div class="water-drop" style="width: 11px; height: 11px; left: 90%; animation-delay: 0.8s;"></div>
+        
+        <div class="header-content">
+            <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img">
+            <h1>နန်းအေးမဥ္ဇူနွယ်</h1>
+            <p>မြေမဲ့စိုက်ပျိုးခြင်း (Hydroponics) စီမံကိန်း</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Hydroponics Project</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">ကျွန်မအကြောင်း</a></li>
+                <li><a href="#project">စီမံကိန်း</a></li>
+                <li><a href="#gallery">ဓာတ်ပုံများ</a></li>
+                <li><a href="#contact">ဆက်သွယ်ရန်</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="about">
+            <h2>ကျွန်မအကြောင်း</h2>
+            <p class="intro-text">
+                ကျွန်မမှာ <strong>နန်းအေးမဥ္ဇူနွယ်</strong>၊ <strong>ဘုန်းတော်ကြီးသင်ပညာရေးကျောင်း</strong>က အထက်တန်းကျောင်းသူတစ်ယောက်ပါ။ ကျွန်မရဲ့ အထူးစိတ်ဝင်စားမှုကတော့ <strong>မြေမဲ့စိုက်ပျိုးခြင်း (Hydroponics)</strong> နည်းပညာပါ။ ဒီနည်းပညာလေးက မြေကြီးမလိုဘဲ ရေနဲ့အာဟာရဖျော်ရည်တွေနဲ့ အပင်တွေကို စိုက်ပျိုးနိုင်တာကြောင့် အရမ်းကိုစိတ်ဝင်စားစရာကောင်းပါတယ်။
+            </p>
+            
+            <div class="highlight">
+                <p>
+                    ကျွန်မရဲ့ <strong>ဓာတ်ပုံရိုက်ခြင်းဝါသနာ</strong>နဲ့ပေါင်းစပ်ပြီး Hydroponics စနစ်နဲ့ကြီးထွားလာတဲ့ အပင်လေးတွေရဲ့ အဆင့်ဆင့်ပြောင်းလဲမှုကို ဓာတ်ပုံတွေရိုက်ကူးပြီး မှတ်တမ်းတင်ထားပါတယ်။
+                </p>
+            </div>
+        </section>
+        
+        <section id="project">
+            <h2>စီမံကိန်းအကြောင်း</h2>
+            <p>
+                လက်ရှိမှာ ကျွန်မက Hydroponics နဲ့ပတ်သက်တဲ့ သိပ္ပံပရောဂျက်တစ်ခုကို လုပ်ဆောင်နေပါတယ်။ အပင်တွေရဲ့ကြီးထွားမှုကို နေ့စဉ်လေ့လာပြီး ဓာတ်ပုံတွေရိုက်ပြီး မှတ်တမ်းတင်ထားပါတယ်။
+            </p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>သိပ္ပံနည်းကျလေ့လာမှု</h3>
+                    <p>Hydroponics စနစ်ရဲ့ အကျိုးကျေးဇူးတွေကို သိပ္ပံနည်းကျစမ်းသပ်လေ့လာခြင်း</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>ဓာတ်ပုံမှတ်တမ်း</h3>
+                    <p>အပင်တွေရဲ့ဖွံ့ဖြိုးမှုအဆင့်ဆင့်ကို ဓာတ်ပုံများဖြင့် မှတ်တမ်းတင်ခြင်း</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>ရလဒ်များဆန်းစစ်ခြင်း</h3>
+                    <p>ရေနဲ့အာဟာရသုံးစွဲမှုနဲ့ အထွက်နှုန်းတို့ကို ဆန်းစစ်ခြင်း</p>
+                </div>
+            </div>
+            
+            <div class="equation-box">
+                <span class="equation-label">Photosynthesis Equation</span>
+                <div class="equation">6CO₂ + 6H₂O + Light → C₆H₁₂O₆ (Glucose) + 6O₂</div>
+                <p style="margin-top: 1rem;">အပင်များသည် အလင်းရောင်ခြည်ကို အသုံးပြု၍ ကာဗွန်ဒိုင်အောက်ဆိုဒ်နှင့် ရေမှ ဂလူးကို့စ်နှင့် အောက်ဆီဂျင်ကို ထုတ်လုပ်ပါသည်။</p>
+            </div>
+            
+            <button class="btn" id="learnMoreBtn">ပိုမိုလေ့လာရန်</button>
+        </section>
+        
+        <section id="gallery">
+            <h2>ဓာတ်ပုံများ</h2>
+            <p>ကျွန်မရဲ့ Hydroponics စနစ်နဲ့ စိုက်ပျိုးထားသော အပင်များ၏ ဓာတ်ပုံများ</p>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,1" alt="Hydroponics System" class="gallery-img">
+                    <div class="gallery-caption">Hydroponics စနစ်</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,2" alt="Plant Growth" class="gallery-img">
+                    <div class="gallery-caption">အပင်ကြီးထွားမှု</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,3" alt="Nutrient Solution" class="gallery-img">
+                    <div class="gallery-caption">အာဟာရဖျော်ရည်</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,4" alt="Root Development" class="gallery-img">
+                    <div class="gallery-caption">အမြစ်ဖွံ့ဖြိုးမှု</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,5" alt="Harvest" class="gallery-img">
+                    <div class="gallery-caption">ရိတ်သိမ်းခြင်း</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/600x400/?hydroponics,6" alt="Setup" class="gallery-img">
+                    <div class="gallery-caption">စနစ်တည်ဆောက်ပုံ</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-outline" id="viewMoreBtn">ဓာတ်ပုံများကိုကြည့်ရန်</button>
+        </section>
+    </div>
+    
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>ဆက်သွယ်ရန်</h2>
+            <p>ကျွန်မရဲ့ Hydroponics စီမံကိန်းနဲ့ပတ်သက်ပြီး မေးမြန်းလိုပါက ဆက်သွယ်နိုင်ပါသည်</p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <p>&copy; 2023 နန်းအေးမဥ္ဇူနွယ် - Hydroponics Project. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Button click effects
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        
+        learnMoreBtn.addEventListener('click', () => {
+            alert('Hydroponics နည်းပညာနှင့်ပတ်သက်သော အချက်အလက်များကို ကျေးဇူးပြု၍ ဆက်လက်လေ့လာပါ။');
+        });
+        
+        viewMoreBtn.addEventListener('click', () => {
+            alert('ကျေးဇူးပြု၍ ကျွန်မ၏ဓာတ်ပုံများကို ဆက်လက်ကြည့်ရှုပါ။');
+        });
+        
+        // Create more water drops dynamically
+        function createWaterDrops() {
+            const header = document.querySelector('header');
+            for (let i = 0; i < 10; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'water-drop';
+                drop.style.width = `${Math.random() * 10 + 5}px`;
+                drop.style.height = drop.style.width;
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.animationDelay = `${Math.random() * 3}s`;
+                header.appendChild(drop);
+            }
+        }
+        
+        // Call the function when page loads
+        window.addEventListener('load', createWaterDrops);
+        
+        // Gallery item click effect
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('zoomed');
+            });
+        });
+    </script>
+</body>
+</html>
